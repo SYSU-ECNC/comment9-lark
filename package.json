@@ -1,0 +1,36 @@
+{
+  "name": "comment9-lark",
+  "version": "1.0.0",
+  "description": "Comment9 Danmaku Lark Sender",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev index.ts",
+    "serve": "node dist/index.js",
+    "start": "npm run serve",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SYSU-ECNC/comment9-lark.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SYSU-ECNC/comment9-lark/issues"
+  },
+  "homepage": "https://github.com/SYSU-ECNC/comment9-lark#readme",
+  "devDependencies": {
+    "@types/body-parser": "^1.19.2",
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.7.18",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "@larksuiteoapi/node-sdk": "^1.1.0",
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "socket.io-client": "^4.5.2"
+  }
+}
