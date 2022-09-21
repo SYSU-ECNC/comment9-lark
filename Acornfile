@@ -35,7 +35,7 @@ containers: {
     ]
     ports: "3000/http"
   }
-  larkSender: {
+  lark: {
     build: "."
     env: {
       LARK_APP_ID: localData.config.larkAppId
@@ -46,6 +46,7 @@ containers: {
       DANMAKU_TOKEN_NAME: localData.config.tokenName
       DANMAKU_TOKEN_VALUE: localData.config.token
     }
+    ports: "3000/http"
   }
   redis: {
     image: "redis:alpine"

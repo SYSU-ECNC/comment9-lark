@@ -10,7 +10,7 @@ if (!danmakuHost) {
     throw new Error('Missing Danmaku Host');
 }
 
-const socketIOClient = io(danmakuHost, {
+const socketIOClient = io(`${danmakuHost}/danmaku`, {
   auth: {
     activity,
     tokenName,
