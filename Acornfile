@@ -1,0 +1,67 @@
+args: {
+  userConfigData: {}
+}
+
+localData: {
+  config: std.merge({
+    host: "",
+    baseUrl: "",
+    inviteCode: "",
+    larkAppId: "",
+    larkAppSecret: "",
+    larkVerificationToken: "",
+    activity: "",
+    tokenName: "",
+    token: ""
+  }, args.userConfigData)
+}
+
+containers: {
+  comment9: {
+    image: "prnake/comment9"
+    env: {
+      HOST: localData.config.host
+      BASE_URL: localData.config.baseUrl
+      INVITE_CODE: localData.config.inviteCode
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379"
+      MONGO_HOST: "mongo"
+      MONGO_PORT: "27017"
+      MONGO_DATABASE: "Comment9"
+    }
+    dependsOn: [
+      "mongo",
+      "redis"
+    ]
+    ports: "3000/http"
+  }
+  larkSender: {
+    build: "."
+    env: {
+      LARK_APP_ID: localData.config.larkAppId
+      LARK_APP_SECRET: localData.config.larkAppSecret
+      LARK_VERIFICATION_TOKEN: localData.config.larkVerificationToken
+      DANMAKU_HOST: localData.config.host
+      DANMAKU_ACTIVITY: localData.config.activity
+      DANMAKU_TOKEN_NAME: localData.config.tokenName
+      DANMAKU_TOKEN_VALUE: localData.config.token
+    }
+  }
+  redis: {
+    image: "redis:alpine"
+    ports: "6379/tcp"
+  }
+  mongo: {
+    image: "mongo:6.0.1"
+    dirs: {
+      "/data/db": "volume://mongodata?subpath=data"
+    }
+    ports: "27017/tcp"
+  }
+}
+
+volumes: {
+  "mongodata": {
+    accessModes: "readWriteOnce"
+  }
+}
